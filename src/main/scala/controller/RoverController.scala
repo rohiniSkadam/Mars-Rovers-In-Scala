@@ -16,14 +16,12 @@ class RoverController {
     var i: Int = 0
     val rcmd: Array[String] = rover.getRoverCommands
 
-    rcmd.foreach(cmd => {
-      cmd match {
-        case "L" => moveLeft(rover)
-        case "R" => moveRight(rover)
-        case "M" => move(rover)
-        case _ => println("Invalid Command")
-      }
-    })
+    rcmd.foreach {
+      case "L" => moveLeft(rover)
+      case "R" => moveRight(rover)
+      case "M" => move(rover)
+      case _ => println("Invalid Command")
+    }
   }
 
   /**

@@ -16,13 +16,14 @@ class PlateauController {
   var roverFace: String = _
   var plateau: Plateau = _
   var roverList = new ListBuffer[Rover]()
+
   /**
     * Function to take Upper Right Coordinate & Rover Count
     */
   def getInput: Unit = {
-    println("Enter Upper Right Coordinates of Plateau : ")
+    print("Enter Upper Right Coordinates of Plateau : ")
     val upperRightCo: String = scala.io.StdIn.readLine()
-    println("Enter Number of Rovers : ")
+    print("Enter Number of Rovers : ")
     val numOfRovers: Int = scala.io.StdIn.readLine().toInt
     splitUpperRightCo(upperRightCo)
     getRoverDetails(numOfRovers)
@@ -37,9 +38,9 @@ class PlateauController {
     var cmdArray: Array[String] = null
     var i = 0
     while (i < numOfRovers) {
-      println("Enter Rover Position : ")
+      print("Enter Rover Position (x y face) : ")
       val roverPosition: String = scala.io.StdIn.readLine().toUpperCase()
-      println("Enter Series of commands : ")
+      print("Enter series of Rover commands  : ")
       val roverCommands: String = scala.io.StdIn.readLine().toUpperCase()
       cmdArray = roverCommands.split("")
       splitRoverPositions(roverPosition)
@@ -86,7 +87,6 @@ class PlateauController {
       reoverController.fireCommand(r)
       displayRover.showRover(r)
     })
-
   }
 
   /**
