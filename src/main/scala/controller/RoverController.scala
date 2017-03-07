@@ -1,11 +1,11 @@
 package controller
 
-import model.Rover
+import model.{Plateau, Rover}
 
 /**
   * Created by synerzip on 21/2/17.
   */
-class RoverController {
+object RoverController {
 
   /**
     * Function to fire commands for Rover r
@@ -31,13 +31,13 @@ class RoverController {
     val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.face = "N"
+        rover.face="N"
       case "N" =>
-        rover.face = "W"
+        rover.face="W"
       case "W" =>
-        rover.face = "S"
+        rover.face="S"
       case "S" =>
-        rover.face = "E"
+        rover.face="E"
       case _ => println("Invalid Face Direction")
     }
     rover
@@ -52,16 +52,14 @@ class RoverController {
     val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.face = "S"
+        rover.face="S"
       case "S" =>
-        rover.face = "W"
+        rover.face="W"
       case "W" =>
-        rover.face = "N"
+        rover.face="N"
       case "N" =>
-        rover.face = "E"
-      case _ => {
-        println("Invalid Face Direction")
-      }
+        rover.face="E"
+      case _ =>  println("Invalid Face Direction")
     }
     rover
   }
@@ -77,13 +75,13 @@ class RoverController {
     val yCo: Int = rover.yCo
     currenFace match {
       case "E" =>
-        rover.xCo = xCo + 1
+        rover.xCo=xCo + 1
       case "S" =>
-        rover.yCo = yCo - 1
+        rover.yCo=yCo - 1
       case "W" =>
-        rover.xCo = xCo - 1
+        rover.xCo=xCo - 1
       case "N" =>
-        rover.yCo = yCo + 1
+        rover.yCo=yCo + 1
       case _ => println("Invalid Face Direction")
     }
     rover

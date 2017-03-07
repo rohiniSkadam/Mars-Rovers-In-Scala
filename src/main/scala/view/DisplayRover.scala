@@ -5,7 +5,7 @@ import model.Rover
 /**
   * Created by synerzip on 21/2/17.
   */
-class DisplayRover {
+object DisplayRover {
   /**
     * Function to display the Rover Position
     *

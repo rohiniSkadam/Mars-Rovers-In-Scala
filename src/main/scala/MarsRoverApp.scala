@@ -11,14 +11,12 @@ object MarsRoverApp {
     * @param args
     */
   def main(args: Array[String]): Unit = {
-    val plateauController = new PlateauController
-    val displayRover = new DisplayRover
 
-    val plateau = plateauController.getInput
-    val rovList = plateauController.roverPosition(plateau)
+    val plateau = PlateauController.getInput
+    val rovList = PlateauController.roverPosition(plateau)
 
     rovList.foreach(r => {
-      displayRover.showRover(r)
+      DisplayRover.showRover(r)
     })
   }
 }

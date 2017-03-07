@@ -7,7 +7,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * Created by synerzip on 21/2/17.
   */
-class PlateauController {
+object PlateauController {
   val roverList = new ListBuffer[Rover]()
 
   /**
@@ -86,10 +86,8 @@ class PlateauController {
     * @param plateau - Object of Plateau to get the rover list
     */
   def roverPosition(plateau: Plateau): List[Rover] = {
-    val reoverController = new RoverController
     val rovList: List[Rover] = plateau.roverList
     rovList.foreach(r => {
-      reoverController.fireCommand(r)
     })
     rovList
   }
