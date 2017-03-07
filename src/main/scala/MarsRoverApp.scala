@@ -1,4 +1,5 @@
 import controller.PlateauController
+import view.DisplayRover
 
 /**
   * Created by synerzip on 21/2/17.
@@ -11,7 +12,12 @@ object MarsRoverApp {
     */
   def main(args: Array[String]): Unit = {
     val plateauController = new PlateauController
-    plateauController.getInput
+    val displayRover=new DisplayRover
+
+    val platuae=plateauController.getInput
+    val rover=plateauController.roverPosition(platuae)
+    displayRover.showRover(rover)
+
   }
 }
 

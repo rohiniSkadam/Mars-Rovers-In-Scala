@@ -12,7 +12,7 @@ class DisplayRover {
     * @param rover -Rover Object which contains current position of Rover
     */
   def showRover(rover: Rover): Unit = {
-    println(rover.getXCo + " " + rover.getYCo + " " + rover.getFace)
+    println(rover.xCo + " " + rover.yCo + " " + rover.face)
   }
 
 }

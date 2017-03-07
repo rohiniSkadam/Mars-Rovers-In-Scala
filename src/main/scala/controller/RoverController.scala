@@ -1,6 +1,6 @@
 package controller
 
-import model.Rover
+import model.{ Rover}
 
 /**
   * Created by synerzip on 21/2/17.
@@ -12,16 +12,15 @@ class RoverController {
     *
     * @param rover - Rover Object which contains current position of Rover
     */
-  def fireCommand(rover: Rover): Unit = {
-    var i: Int = 0
-    val rcmd: Array[String] = rover.getRoverCommands
-
+  def fireCommand(rover: Rover): Rover = {
+    val rcmd: Array[String] = rover.roverCommands
     rcmd.foreach {
       case "L" => moveLeft(rover)
       case "R" => moveRight(rover)
       case "M" => move(rover)
-      case _ => println("Invalid Command")
+      case _ =>  println("Invalid Command")
     }
+    rover
   }
 
   /**
@@ -29,20 +28,20 @@ class RoverController {
     *
     * @param rover -Rover Object which contains current position of Rover
     */
-  def moveLeft(rover: Rover): Unit = {
-    val currentFace: String = rover.getFace
+  def moveLeft(rover: Rover): Rover = {
+    val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.setFace("N")
+        rover.face="N"
       case "N" =>
-        rover.setFace("W")
+        rover.face="W"
       case "W" =>
-        rover.setFace("S")
+        rover.face="S"
       case "S" =>
-        rover.setFace("E")
-      case _ => println("Invalid Face Direction")
-
-    }
+        rover.face="E"
+      case _ =>  println("Invalid Face Direction")
+      }
+    rover
   }
 
   /**
@@ -50,20 +49,20 @@ class RoverController {
     *
     * @param rover - Rover Object which contains current position of Rover
     */
-  def moveRight(rover: Rover): Unit = {
-    val currentFace: String = rover.getFace
+  def moveRight(rover: Rover): Rover = {
+    val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.setFace("S")
+        rover.face="S"
       case "S" =>
-        rover.setFace("W")
+        rover.face="W"
       case "W" =>
-        rover.setFace("N")
+        rover.face="N"
       case "N" =>
-        rover.setFace("E")
+        rover.face="E"
       case _ => println("Invalid Face Direction")
-
     }
+    rover
   }
 
   /**
@@ -71,20 +70,21 @@ class RoverController {
     *
     * @param rover - Rover Object which contains current position of Rover
     */
-  def move(rover: Rover): Unit = {
-    val currenFace: String = rover.getFace
-    val xCo: Int = rover.getXCo
-    val yCo: Int = rover.getYCo
+  def move(rover: Rover): Rover = {
+    val currenFace: String = rover.face
+    val xCo: Int = rover.xCo
+    val yCo: Int = rover.yCo
     currenFace match {
       case "E" =>
-        rover.setXCo(xCo + 1)
+        rover.xCo=xCo + 1
       case "S" =>
-        rover.setYCo(yCo - 1)
+        rover.yCo=yCo - 1
       case "W" =>
-        rover.setXCo(xCo - 1)
+        rover.xCo=xCo - 1
       case "N" =>
-        rover.setYCo(yCo + 1)
+        rover.yCo=yCo + 1
       case _ => println("Invalid Face Direction")
     }
+    rover
   }
 }
