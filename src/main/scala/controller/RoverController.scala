@@ -12,15 +12,14 @@ class RoverController {
     *
     * @param rover - Rover Object which contains current position of Rover
     */
-  def fireCommand(rover: Rover): Rover = {
+  def fireCommand(rover: Rover): Unit = {
     val rcmd: Array[String] = rover.roverCommands
     rcmd.foreach {
       case "L" => moveLeft(rover)
       case "R" => moveRight(rover)
       case "M" => move(rover)
-      case _ =>  println("Invalid Command")
+      case _ => println("Invalid Command")
     }
-    rover
   }
 
   /**
@@ -39,8 +38,8 @@ class RoverController {
         rover.face="S"
       case "S" =>
         rover.face="E"
-      case _ =>  println("Invalid Face Direction")
-      }
+      case _ => println("Invalid Face Direction")
+    }
     rover
   }
 
@@ -60,7 +59,9 @@ class RoverController {
         rover.face="N"
       case "N" =>
         rover.face="E"
-      case _ => println("Invalid Face Direction")
+      case _ => {
+        println("Invalid Face Direction")
+      }
     }
     rover
   }

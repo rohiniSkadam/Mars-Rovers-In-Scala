@@ -9,10 +9,12 @@ import scala.collection.mutable.ListBuffer
   * Created by synerzip on 21/2/17.
   */
 class PlateauController {
+ val roverList = new ListBuffer[Rover]()
+
   /**
     * Function to take Upper Right Coordinate & Rover Count
     */
-  def getInput: Plateau = {
+  def getInput:Plateau = {
     print("Enter Upper Right Coordinates of Plateau : ")
     val upperRightCo: String = scala.io.StdIn.readLine()
     print("Enter Number of Rovers : ")
@@ -37,10 +39,10 @@ class PlateauController {
       val roverCommands: String = scala.io.StdIn.readLine().toUpperCase()
       val cmdArray = roverCommands.split("")
       val roverPositionArray= splitRoverPositions(roverPosition)
-      val roverList=getRoverList(cmdArray,roverPositionArray).toList
+      getRoverList(cmdArray,roverPositionArray)
       val upperRightXco = upperRightCoArray(0).toInt
       val upperRightYco = upperRightCoArray(1).toInt
-      plateau = new Plateau(upperRightXco, upperRightYco, numOfRovers, roverList)
+      plateau = new Plateau(upperRightXco, upperRightYco, numOfRovers, roverList.toList)
       i += 1
     }
     plateau
@@ -66,7 +68,6 @@ class PlateauController {
     val roverPosYco = roverPositionArray(1).toInt
     val roverFace = roverPositionArray(2)
     val rover: Rover = new Rover(roverPosXco, roverPosYco, roverFace, cmdArray)
-    val roverList = new ListBuffer[Rover]()
     roverList += rover
   }
 
@@ -75,15 +76,15 @@ class PlateauController {
     *
     * @param plateau - Object of Plateau to get the rover list
     */
-  def roverPosition(plateau: Plateau): Rover = {
+  def roverPosition(plateau: Plateau): List[Rover] = {
     val reoverController = new RoverController
     val displayRover = new DisplayRover
     val rovList: List[Rover] = plateau.roverList
-    var rover: Rover =null
+
     rovList.foreach(r => {
-      rover=reoverController.fireCommand(r)
+      reoverController.fireCommand(r)
     })
-    rover
+    rovList
   }
 
   /**
