@@ -1,7 +1,6 @@
 package controller
 
 import model.{Plateau, Rover}
-import view.DisplayRover
 
 import scala.collection.mutable.ListBuffer
 
@@ -9,18 +8,18 @@ import scala.collection.mutable.ListBuffer
   * Created by synerzip on 21/2/17.
   */
 class PlateauController {
- val roverList = new ListBuffer[Rover]()
+  val roverList = new ListBuffer[Rover]()
 
   /**
     * Function to take Upper Right Coordinate & Rover Count
     */
-  def getInput:Plateau = {
+  def getInput: Plateau = {
     print("Enter Upper Right Coordinates of Plateau : ")
     val upperRightCo: String = scala.io.StdIn.readLine()
     print("Enter Number of Rovers : ")
     val numOfRovers: Int = scala.io.StdIn.readLine().toInt
-    val upperRightCoArray=splitUpperRightCo(upperRightCo)
-    val plateau=getRoverDetails(numOfRovers,upperRightCoArray)
+    val upperRightCoArray = splitUpperRightCo(upperRightCo)
+    val plateau = getRoverDetails(numOfRovers, upperRightCoArray)
     plateau
   }
 
@@ -29,20 +28,20 @@ class PlateauController {
     *
     * @param numOfRovers - Number of rovers on plateau
     */
-  def getRoverDetails(numOfRovers: Int,upperRightCoArray:Array[String]): Plateau = {
+  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String]): Plateau = {
     var i = 0
-    var plateau:Plateau=null
+    var plateau: Plateau = null
     while (i < numOfRovers) {
       print("Enter Rover Position (x y face) : ")
       val roverPosition: String = scala.io.StdIn.readLine().toUpperCase()
       print("Enter series of Rover commands  : ")
       val roverCommands: String = scala.io.StdIn.readLine().toUpperCase()
       val cmdArray = roverCommands.split("")
-      val roverPositionArray= splitRoverPositions(roverPosition)
-      getRoverList(cmdArray,roverPositionArray)
+      val roverPositionArray = splitRoverPositions(roverPosition)
+      getRoverList(cmdArray, roverPositionArray)
       val upperRightXco = upperRightCoArray(0).toInt
       val upperRightYco = upperRightCoArray(1).toInt
-      plateau = new Plateau(upperRightXco, upperRightYco, numOfRovers, roverList.toList)
+      plateau = Plateau(upperRightXco, upperRightYco, numOfRovers, roverList.toList)
       i += 1
     }
     plateau
@@ -55,7 +54,7 @@ class PlateauController {
     */
   def splitRoverPositions(roverPositions: String): Array[String] = {
     val roverPositionArray: Array[String] = roverPositions.split(" ")
-   roverPositionArray
+    roverPositionArray
   }
 
   /**
@@ -63,28 +62,12 @@ class PlateauController {
     *
     * @param cmdArray - Stores commands given to Rover
     */
-  def getRoverList(cmdArray: Array[String],roverPositionArray:Array[String]): ListBuffer[Rover] = {
+  def getRoverList(cmdArray: Array[String], roverPositionArray: Array[String]): ListBuffer[Rover] = {
     val roverPosXco = roverPositionArray(0).toInt
     val roverPosYco = roverPositionArray(1).toInt
     val roverFace = roverPositionArray(2)
-    val rover: Rover = new Rover(roverPosXco, roverPosYco, roverFace, cmdArray)
+    val rover: Rover = Rover(roverPosXco, roverPosYco, roverFace, cmdArray)
     roverList += rover
-  }
-
-  /**
-    * Function to find the rover position & to fire the commands
-    *
-    * @param plateau - Object of Plateau to get the rover list
-    */
-  def roverPosition(plateau: Plateau): List[Rover] = {
-    val reoverController = new RoverController
-    val displayRover = new DisplayRover
-    val rovList: List[Rover] = plateau.roverList
-
-    rovList.foreach(r => {
-      reoverController.fireCommand(r)
-    })
-    rovList
   }
 
   /**
@@ -95,5 +78,19 @@ class PlateauController {
   def splitUpperRightCo(upperRightCo: String): Array[String] = {
     val upperRightCoArray: Array[String] = upperRightCo.split(" ")
     upperRightCoArray
+  }
+
+  /**
+    * Function to find the rover position & to fire the commands
+    *
+    * @param plateau - Object of Plateau to get the rover list
+    */
+  def roverPosition(plateau: Plateau): List[Rover] = {
+    val reoverController = new RoverController
+    val rovList: List[Rover] = plateau.roverList
+    rovList.foreach(r => {
+      reoverController.fireCommand(r)
+    })
+    rovList
   }
 }

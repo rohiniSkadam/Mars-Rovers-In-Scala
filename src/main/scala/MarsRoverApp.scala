@@ -14,10 +14,10 @@ object MarsRoverApp {
     val plateauController = new PlateauController
     val displayRover = new DisplayRover
 
-    val plateau=plateauController.getInput
-    val rovList=plateauController.roverPosition(plateau)
+    val plateau = plateauController.getInput
+    val rovList = plateauController.roverPosition(plateau)
 
-    rovList.foreach(r=>{
+    rovList.foreach(r => {
       displayRover.showRover(r)
     })
   }
