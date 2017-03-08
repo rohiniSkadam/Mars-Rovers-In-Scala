@@ -1,6 +1,6 @@
 package controller
 
-import model.{Plateau, Rover}
+import model.{ Rover}
 
 /**
   * Created by synerzip on 21/2/17.
@@ -12,14 +12,19 @@ object RoverController {
     *
     * @param rover - Rover Object which contains current position of Rover
     */
-  def fireCommand(rover: Rover): Unit = {
-    val rcmd: Array[String] = rover.roverCommands
+  def fireCommand(rover: Rover): Rover = {
+    var rov=rover
+    val rcmd: Array[String] = rov.roverCommands
     rcmd.foreach {
-      case "L" => moveLeft(rover)
-      case "R" => moveRight(rover)
-      case "M" => move(rover)
+      case "L" =>
+        rov=moveLeft(rov)
+      case "R" =>
+        rov=moveRight(rov)
+      case "M" =>
+        rov=move(rov)
       case _ => println("Invalid Command")
     }
+    rov
   }
 
   /**
@@ -31,16 +36,17 @@ object RoverController {
     val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.face="N"
+        rover.copy(face = "N")
       case "N" =>
-        rover.face="W"
+        rover.copy(face = "W")
       case "W" =>
-        rover.face="S"
+        rover.copy(face = "S")
       case "S" =>
-        rover.face="E"
+        rover.copy(face = "E")
       case _ => println("Invalid Face Direction")
+        rover.copy()
     }
-    rover
+
   }
 
   /**
@@ -52,16 +58,16 @@ object RoverController {
     val currentFace: String = rover.face
     currentFace match {
       case "E" =>
-        rover.face="S"
+        rover.copy(face = "S")
       case "S" =>
-        rover.face="W"
+        rover.copy(face = "W")
       case "W" =>
-        rover.face="N"
+        rover.copy(face = "N")
       case "N" =>
-        rover.face="E"
+        rover.copy(face = "E")
       case _ =>  println("Invalid Face Direction")
+        rover.copy()
     }
-    rover
   }
 
   /**
@@ -70,20 +76,20 @@ object RoverController {
     * @param rover - Rover Object which contains current position of Rover
     */
   def move(rover: Rover): Rover = {
-    val currenFace: String = rover.face
+    val currentFace: String = rover.face
     val xCo: Int = rover.xCo
     val yCo: Int = rover.yCo
-    currenFace match {
+    currentFace match {
       case "E" =>
-        rover.xCo=xCo + 1
+       rover.copy(xCo=xCo+1)
       case "S" =>
-        rover.yCo=yCo - 1
+        rover.copy(yCo=yCo-1)
       case "W" =>
-        rover.xCo=xCo - 1
+        rover.copy(xCo=xCo-1)
       case "N" =>
-        rover.yCo=yCo + 1
+        rover.copy(yCo=yCo+1)
       case _ => println("Invalid Face Direction")
+        rover.copy()
     }
-    rover
   }
 }

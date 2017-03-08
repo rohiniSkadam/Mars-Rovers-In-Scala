@@ -87,8 +87,9 @@ object PlateauController {
     */
   def roverPosition(plateau: Plateau): List[Rover] = {
     val rovList: List[Rover] = plateau.roverList
-    rovList.foreach(r => {
+    val newList=rovList.map(r => {
+      RoverController.fireCommand(r)
     })
-    rovList
+    newList
   }
 }
