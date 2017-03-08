@@ -22,12 +22,11 @@ object PlateauController {
     val file: File = new File(filenameTemp)
     val fr: FileReader = new FileReader(file)
     val br: BufferedReader = new BufferedReader(fr)
-
     val upperRightCo = br.readLine()
     val numOfRovers = br.readLine().toInt
-
     val upperRightCoArray = splitUpperRightCo(upperRightCo)
-    val plateau = getRoverDetails(numOfRovers, upperRightCoArray, br)
+    val rovList = getRoverDetails(numOfRovers,br)
+    val plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
     plateau
   }
 
@@ -36,8 +35,9 @@ object PlateauController {
     *
     * @param numOfRovers - Number of rovers on plateau
     */
-  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String], br: BufferedReader): Plateau = {
+  def getRoverDetails(numOfRovers: Int, br: BufferedReader): Unit = {
     var i = 0
+    var rovList:ListBuffer[Rover]=null
     while (i < numOfRovers) {
       val roverPosition = br.readLine()
       val roverCommands = br.readLine()
@@ -46,8 +46,6 @@ object PlateauController {
       getRoverList(cmdArray, roverPositionArray)
       i += 1
     }
-    val plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
-    plateau
   }
 
   /**
