@@ -38,7 +38,6 @@ object PlateauController {
     */
   def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String], br: BufferedReader): Plateau = {
     var i = 0
-    var plateau: Plateau = null
     while (i < numOfRovers) {
       val roverPosition = br.readLine()
       val roverCommands = br.readLine()
@@ -47,7 +46,7 @@ object PlateauController {
       getRoverList(cmdArray, roverPositionArray)
       i += 1
     }
-    plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
+    val plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
     plateau
   }
 
