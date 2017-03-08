@@ -1,7 +1,9 @@
 package controller
 
-import model.{Plateau, Rover}
+import java.io.{BufferedReader, File, FileReader}
+import java.net.URL
 
+import model.{Plateau, Rover}
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -9,17 +11,21 @@ import scala.collection.mutable.ListBuffer
   */
 object PlateauController {
   val roverList = new ListBuffer[Rover]()
-
   /**
     * Function to take Upper Right Coordinate & Rover Count
     */
   def getInput: Plateau = {
-    print("Enter Upper Right Coordinates of Plateau : ")
-    val upperRightCo: String = scala.io.StdIn.readLine()
-    print("Enter Number of Rovers : ")
-    val numOfRovers: Int = scala.io.StdIn.readLine().toInt
+    val resource: URL = getClass.getClassLoader.getResource("sample")
+    val filenameTemp: String = resource.getFile
+    val file: File= new File(filenameTemp)
+    val fr: FileReader = new FileReader(file)
+    val br: BufferedReader = new BufferedReader(fr)
+
+    val upperRightCo=br.readLine()
+    val numOfRovers=br.readLine().toInt
+
     val upperRightCoArray = splitUpperRightCo(upperRightCo)
-    val plateau = getRoverDetails(numOfRovers, upperRightCoArray)
+    val plateau = getRoverDetails(numOfRovers, upperRightCoArray,br)
     plateau
   }
 
@@ -28,14 +34,12 @@ object PlateauController {
     *
     * @param numOfRovers - Number of rovers on plateau
     */
-  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String]): Plateau = {
+  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String],br:BufferedReader): Plateau = {
     var i = 0
     var plateau: Plateau = null
     while (i < numOfRovers) {
-      print("Enter Rover Position (x y face) : ")
-      val roverPosition: String = scala.io.StdIn.readLine().toUpperCase()
-      print("Enter series of Rover commands  : ")
-      val roverCommands: String = scala.io.StdIn.readLine().toUpperCase()
+      val roverPosition=br.readLine()
+      val roverCommands=br.readLine()
       val cmdArray = roverCommands.split("")
       val roverPositionArray = splitRoverPositions(roverPosition)
       getRoverList(cmdArray, roverPositionArray)

@@ -6,7 +6,7 @@ import model.{ Rover}
   * Created by synerzip on 21/2/17.
   */
 object RoverController {
-
+  var flag:Boolean=false
   /**
     * Function to fire commands for Rover r
     *
