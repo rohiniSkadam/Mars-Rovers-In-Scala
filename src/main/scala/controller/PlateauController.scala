@@ -22,10 +22,12 @@ object PlateauController {
     val file: File = new File(filenameTemp)
     val fr: FileReader = new FileReader(file)
     val br: BufferedReader = new BufferedReader(fr)
+
     val upperRightCo = br.readLine()
     val numOfRovers = br.readLine().toInt
+
     val upperRightCoArray = splitUpperRightCo(upperRightCo)
-    val rovList = getRoverDetails(numOfRovers,br)
+    getRoverDetails(numOfRovers,br)
     val plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
     plateau
   }
