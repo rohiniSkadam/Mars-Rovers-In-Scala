@@ -45,11 +45,9 @@ object PlateauController {
       val cmdArray = roverCommands.split("")
       val roverPositionArray = splitRoverPositions(roverPosition)
       getRoverList(cmdArray, roverPositionArray)
-      val upperRightXco = upperRightCoArray(0).toInt
-      val upperRightYco = upperRightCoArray(1).toInt
-      plateau = Plateau(upperRightXco, upperRightYco, numOfRovers, roverList.toList)
       i += 1
     }
+    plateau = Plateau(upperRightCoArray(0).toInt, upperRightCoArray(1).toInt, numOfRovers, roverList.toList)
     plateau
   }
 
