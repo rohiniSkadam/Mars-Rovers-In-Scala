@@ -4,6 +4,7 @@ import java.io.{BufferedReader, File, FileReader}
 import java.net.URL
 
 import model.{Plateau, Rover}
+
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -11,21 +12,22 @@ import scala.collection.mutable.ListBuffer
   */
 object PlateauController {
   val roverList = new ListBuffer[Rover]()
+
   /**
     * Function to take Upper Right Coordinate & Rover Count
     */
   def getInput: Plateau = {
     val resource: URL = getClass.getClassLoader.getResource("sample")
     val filenameTemp: String = resource.getFile
-    val file: File= new File(filenameTemp)
+    val file: File = new File(filenameTemp)
     val fr: FileReader = new FileReader(file)
     val br: BufferedReader = new BufferedReader(fr)
 
-    val upperRightCo=br.readLine()
-    val numOfRovers=br.readLine().toInt
+    val upperRightCo = br.readLine()
+    val numOfRovers = br.readLine().toInt
 
     val upperRightCoArray = splitUpperRightCo(upperRightCo)
-    val plateau = getRoverDetails(numOfRovers, upperRightCoArray,br)
+    val plateau = getRoverDetails(numOfRovers, upperRightCoArray, br)
     plateau
   }
 
@@ -34,12 +36,12 @@ object PlateauController {
     *
     * @param numOfRovers - Number of rovers on plateau
     */
-  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String],br:BufferedReader): Plateau = {
+  def getRoverDetails(numOfRovers: Int, upperRightCoArray: Array[String], br: BufferedReader): Plateau = {
     var i = 0
     var plateau: Plateau = null
     while (i < numOfRovers) {
-      val roverPosition=br.readLine()
-      val roverCommands=br.readLine()
+      val roverPosition = br.readLine()
+      val roverCommands = br.readLine()
       val cmdArray = roverCommands.split("")
       val roverPositionArray = splitRoverPositions(roverPosition)
       getRoverList(cmdArray, roverPositionArray)
@@ -91,7 +93,7 @@ object PlateauController {
     */
   def roverPosition(plateau: Plateau): List[Rover] = {
     val rovList: List[Rover] = plateau.roverList
-    val newList=rovList.map(r => {
+    val newList = rovList.map(r => {
       RoverController.fireCommand(r)
     })
     newList
