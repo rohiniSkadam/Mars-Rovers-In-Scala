@@ -12,18 +12,18 @@ object RoverController {
     * @param rover - Rover Object which contains current position of Rover
     */
   def fireCommand(rover: Rover): Rover = {
-    var r = rover
-    val rcmd: Array[String] = r.roverCommands
+    var rov = rover
+    val rcmd: Array[String] = rov.roverCommands
     rcmd.foreach {
       case "L" =>
-        r = moveLeft(r)
+        rov = moveLeft(rov)
       case "R" =>
-        r = moveRight(r)
+        rov = moveRight(rov)
       case "M" =>
-        r = move(r)
+        rov = move(rov)
       case _ => println("Invalid Command")
     }
-    r
+    rov
   }
 
   /**

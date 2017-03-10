@@ -14,7 +14,6 @@ object MarsRoverApp {
 
     val plateau = PlateauController.getInput
     val rovList = PlateauController.roverPosition(plateau)
-
     rovList.foreach(r => {
       DisplayRover.showRover(r)
     })
